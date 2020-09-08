@@ -1,0 +1,38 @@
+
+<div style="color: crimson;">
+    {{msg}}</div>
+<form [formGroup]="loginForm" (ngSubmit)="login()">
+    <div class="row">
+         <label for="username">
+            Email:
+    <input type="email" formControlName="email" id="username" placeholder="Email"  />
+    <div style="color: crimson;"
+    *ngIf="loginForm.get('email').touched && loginForm.get('email').hasError('required')">
+    required</div>
+    <div style="color: crimson;" *ngIf="this.loginForm.get('email').hasError('email')">
+        Email Not Valid</div>
+        </label>
+    
+    </div>
+   
+    <div class="row">
+        <label for="password">
+            Password:
+            <input type="password" formControlName="password" id="password" placeholder="******"  />
+            <div style="color: crimson;"
+            *ngIf="this.loginForm.get('password').touched && this.loginForm.get('password').hasError('required')">
+            required</div>
+        </label>
+    </div>
+    <div class="row">
+        <div class="remember">
+            <div>
+                <input type="checkbox" formControlName="rememberMe" value="Remember me"><span>Remember me</span>
+            </div>
+            <a routerLink="forgetpassword">Forget password ?</a>
+        </div>
+    </div>
+   <div class="row">
+        <button [disabled]="loginForm.invalid" type="submit">Login</button>
+   </div>
+</form>

@@ -9,8 +9,8 @@ namespace Trailer.API.Data
         
          Task<User>Register(User user,string password);
          Task<User>Login(string UserName,string password);
-         bool UserEmailExists(String UserName);
-         bool UserNameExists(String UserName);
+         Task<bool> UserEmailExists(String Email);
+         Task<bool> UserNameExists(String UserName);
         
     }
 }

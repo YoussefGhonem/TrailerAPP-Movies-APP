@@ -18,6 +18,8 @@ using Trailer.API.Models;
 using Microsoft.AspNetCore.Identity;
 using NETCore.MailKit.Extensions;
 using NETCore.MailKit.Infrastructure.Internal;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace Trailer.API
 {
@@ -33,8 +35,14 @@ namespace Trailer.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            // 7- Roles
+            services.Configure<CookiePolicyOptions>(options =>
+               {
+                // This lambda determines whether user consent for non-essential cookies is needed for a given request.
+                options.CheckConsentNeeded = context => true;
+                   options.MinimumSameSitePolicy = SameSiteMode.Lax;
+               });
 
-         
             services.AddControllers();
             // DB Connect
             services.AddDbContext<DataContext>(x => x.UseSqlServer(Configuration.GetConnectionString("MyConnection")));
@@ -57,8 +65,24 @@ namespace Trailer.API
             services.AddAutoMapper(); //AddAutoMapper 
 
             services.AddMailKit(x => x.UseMailKit(Configuration.GetSection("Email").Get<MailKitOptions>()));
-             // CORS Policy
-             services.AddCors();
+            // CORS Policy
+            services.AddCors();
+
+            // 8- Roles / Cookis
+            services.AddAuthentication(options =>
+          {
+              options.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+              options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+              options.DefaultChallengeScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+          }).AddCookie(options =>
+          {
+              options.Cookie.HttpOnly = true;
+              options.ExpireTimeSpan = TimeSpan.FromMinutes(30);
+              options.SlidingExpiration = true;
+              options.LogoutPath = "/account/Logout";
+              options.Cookie.SameSite = SameSiteMode.Lax;
+              options.Cookie.IsEssential = true;
+          });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -68,23 +92,25 @@ namespace Trailer.API
             {
                 app.UseDeveloperExceptionPage();
             }
-           // app.UseHttpsRedirection();
+            // app.UseHttpsRedirection();
 
             app.UseRouting();
             //app.UseCors(x => x.WithOrigins("http://localhost:4200").AllowAnyHeader().AllowAnyMethod()); //CORS Policy
             //app.UseCors("CorsPolicy");
-          //  app.UseCors(x => x.WithOrigins("http://localhost:4200").AllowAnyMethod().AllowAnyHeader());
-          app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
-            app.UseAuthorization();
+            //  app.UseCors(x => x.WithOrigins("http://localhost:4200").AllowAnyMethod().AllowAnyHeader());
+            app.UseCors(x => x.WithOrigins("http://localhost:4200").AllowAnyHeader().AllowAnyMethod().AllowCredentials());
+            app.UseCookiePolicy();
             app.UseAuthentication(); // ASP Identity
+            app.UseAuthorization();
+            
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
             });
-          
+
 
         }
-        
+
     }
 }

@@ -1,0 +1,64 @@
+<form [formGroup]="registerForm" (ngSubmit)="register()">
+    <div class="row ">
+        <label for="username-2">
+            Username:
+            <input type="text" formControlName="userName" id="username-2"  placeholder="user Name" (blur)="isUserNameExist()"/>
+            <div style="color: crimson;"
+                *ngIf="this.registerForm.get('userName').touched  && this.registerForm.get('userName').hasError('required')">
+                required</div>
+                <div style="color: crimson;"  *ngIf="this.registerForm.get('userName').value!==null  && this.registerForm.get('userName').value!==''">
+                    {{messageValidate.userName.matchuserName}}  
+                 </div>
+        </label>
+    </div>
+
+    <div class="row form-group">
+        <label for="email-2">
+            your email:
+            <input type="email" formControlName="email"  name="email" id="email-2" placeholder="email" (blur)="isEmailExist()" />
+            <div style="color: crimson;"
+                *ngIf="registerForm.get('email').touched && registerForm.get('email').hasError('required')">
+                required</div>
+                <div style="color: crimson;" *ngIf="this.registerForm.get('email').hasError('email')">
+                    Email No Valid</div>
+
+                    <div style="color: crimson;"  *ngIf="this.registerForm.get('email').value!==null  && this.registerForm.get('email').value!==''">
+                        {{messageValidate.email.matchEmail}}   </div>
+        </label>
+
+    </div>
+    <div class="row form-group">
+        <label for="password-2">
+            Password:
+            <input type="password" formControlName="password" name="password" id="password-2" placeholder="password" />
+            <div style="color: crimson;"
+                *ngIf="this.registerForm.get('password').touched && this.registerForm.get('password').hasError('required')">
+                required</div>
+
+            <div style="color: crimson;" *ngIf="registerForm.get('password').hasError('minlength')">
+                minimum length is 4</div>
+                <!-- <div style="color: crimson;" *ngIf="!isPasswordValid()">
+                    {{messageValidate.pass.notMatch}}
+                </div> -->
+        </label>
+    </div>
+    <div class="row">
+        <label for="repassword-2">
+            re-type Password:
+            <input type="password" formControlName="passwordConfirm" name="password" id="repassword-2" placeholder="re-type Password"
+                 />
+            <div style="color: crimson;"
+                *ngIf="this.registerForm.get('passwordConfirm').touched && this.registerForm.get('passwordConfirm').hasError('required')">
+                required</div>
+            <div style="color: crimson;" *ngIf="isPasswordMatch()">
+                Not Match</div>
+    
+        </label>
+    </div>
+    <div class="row">
+        <button  [disabled]="registerForm.invalid || isPasswordMatch()" type="submit">sign up</button>
+    </div>
+</form>
+
+
+
