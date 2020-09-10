@@ -14,6 +14,7 @@ import { LoginComponent } from './Account/login/login.component';
 import { RegisterConfirmComponent } from './Account/register-confirm/register-confirm.component';
 import { ForgetPasswordComponent } from './Account/forget-password/forget-password.component';
 import { PasswordConfirmComponent } from './Account/password-confirm/password-confirm.component';
+import { DashboardComponent } from './Admin/dashboard/dashboard.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -24,7 +25,8 @@ import { PasswordConfirmComponent } from './Account/password-confirm/password-co
     LoginComponent,
     RegisterConfirmComponent,
     ForgetPasswordComponent,
-    PasswordConfirmComponent
+    PasswordConfirmComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,

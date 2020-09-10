@@ -62,8 +62,10 @@ namespace Trailer.API
 
             // Repository
             services.AddScoped<IAccountRepository, AccountRepository>();
-            services.AddAutoMapper(); //AddAutoMapper 
-
+            services.AddScoped<IAdminRepo,AdminRepo>();
+            // AddAutoMapper 
+            services.AddAutoMapper(); 
+            // Send Email
             services.AddMailKit(x => x.UseMailKit(Configuration.GetSection("Email").Get<MailKitOptions>()));
             // CORS Policy
             services.AddCors();

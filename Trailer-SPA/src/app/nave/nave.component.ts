@@ -26,6 +26,7 @@ export class NaveComponent implements OnInit {
         });
       }
     }
+
   logout(){
     this.authService.logOut().subscribe(
       succ=>{
@@ -39,10 +40,12 @@ export class NaveComponent implements OnInit {
     )
   }
 
-  isUserRegistered(){
+    isUserRegistered() {
+    const email = !!localStorage.getItem('email');
+    const exp = !!localStorage.getItem('expire');
+    const role = !!localStorage.getItem('role');
 
-    const storage=!!localStorage.getItem('email');
-    if(storage){
+    if (email && role && exp) {
       return true;
     }
     return false;

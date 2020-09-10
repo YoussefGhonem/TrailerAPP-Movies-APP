@@ -171,13 +171,12 @@ namespace Trailer.API.Controllers
                 }
 
                 var roleName = await GetRoleNameByUserId(user.Id);
-                if (roleName != null)
-                {
-
+                if (roleName != null)            
+               {
                     HttpContext.Response.Cookies.Append(
                      "name", "value",
                      new CookieOptions() { SameSite = SameSiteMode.Lax });
-                    AddCookies(user.UserName, roleName, user.Id, userLoginDto.RememberMe, user.Email);
+                     AddCookies(user.UserName, roleName, user.Id, userLoginDto.RememberMe, user.Email);
                 }
                 return Ok();
             }
@@ -203,9 +202,8 @@ namespace Trailer.API.Controllers
             return null;
         }
 
-        [Authorize]
-        [HttpGet]
-        [Route("CheckUserClaims/{email}&{role}")]  // get Email Cliam    
+        // [Authorize]
+        [HttpGet("CheckUserClaims/{email}/{role}")]      // get Email Cliam   
         public IActionResult CheckUserClaims(string email, string role)
         {
             var userEmail = User.FindFirst(ClaimTypes.Email)?.Value;
@@ -341,7 +339,7 @@ namespace Trailer.API.Controllers
             {
                 return StatusCode(StatusCodes.Status200OK);
             }
-            return StatusCode(StatusCodes.Status400BadRequest);
+            return NoContent();
         }
 
         [HttpGet("usernameexits")]
@@ -352,7 +350,7 @@ namespace Trailer.API.Controllers
             {
                 return StatusCode(StatusCodes.Status200OK);
             }
-            return StatusCode(StatusCodes.Status400BadRequest);
+            return NoContent();
         }
 
         [HttpGet("ForgetPassword/{email}")]

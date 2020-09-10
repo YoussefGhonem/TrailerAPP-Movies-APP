@@ -76,8 +76,9 @@ export class AuthService {
     return this.http.get('http://localhost:5000/Account/GetRoleName/' + email, { responseType: 'text' }).pipe();
   }
 
+
   CheckUserClaims(email: string, role: string) {
-    return this.http.get('http://localhost:5000/Account/CheckUserClaims/' + email + '&' + role,
+    return this.http.get('http://localhost:5000/Account/CheckUserClaims/' + email + '/' + role,
       { withCredentials: true }).pipe();
   }
   ////////////////////////////////////////////////
