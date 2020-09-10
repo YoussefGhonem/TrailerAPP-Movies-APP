@@ -47,7 +47,7 @@
 						height="58"></a>
 			</div>
 			<!-- Collect the nav links, forms, and other content for toggling -->
-			<div class="collapse navbar-collapse flex-parent" id="bs-example-navbar-collapse-1">
+			<div  class="collapse navbar-collapse flex-parent" id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav flex-child-menu menu-left">
 					<li class="hidden">
 						<a href="#page-top"></a>
@@ -57,7 +57,7 @@
 							Home
 						</a>
 					</li>
-					<li class="dropdown first">
+					<li *hasRole="['User']" class="dropdown first">
 						<a class="btn btn-default dropdown-toggle lv1" data-toggle="dropdown" data-hover="dropdown">
 							movies<i class="fa fa-angle-down" aria-hidden="true"></i>
 						</a>
@@ -128,16 +128,10 @@
 		</nav>
 
 		<!-- top search form -->
-		<div class="top-search">
-			<select>
-				<option value="united">TV show</option>
-				<option value="saab">Others</option>
-			</select>
-			<input type="text" placeholder="Search for a movie, TV Show or celebrity that you are looking for">
-		</div>
+
 	</div>
 </header>
-<div class="hero common-hero">
+<div class=" common-hero">
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12">

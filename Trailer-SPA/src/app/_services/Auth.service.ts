@@ -89,6 +89,8 @@ export class AuthService {
   login(login: UserLogin) {
     return this.http.post<User>(this.baseUrl + 'login', login, this.headers);
   }
+
+
   logOut() {
     return this.http.get(this.baseUrl + 'logout', { withCredentials: true });
   }
@@ -110,4 +112,17 @@ export class AuthService {
   ResetPassword(reset: ResetPassword) : Observable<ResetPassword>{
     return this.http.post<ResetPassword>(this.baseUrl + 'ResetPassword', reset, this.headers).pipe();
   }
+
+
+  // roleMatch(AllowedRoles:string) : boolean{
+  //   let isMatch = false;
+  //   const userRoles = this.decodedToken.role;
+  //     if(userRoles.includes(element)){
+  //       isMatch = true;
+  //       return;
+  //     }
+   
+  //   return isMatch;
+  // }
 }
+

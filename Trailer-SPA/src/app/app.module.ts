@@ -15,6 +15,7 @@ import { RegisterConfirmComponent } from './Account/register-confirm/register-co
 import { ForgetPasswordComponent } from './Account/forget-password/forget-password.component';
 import { PasswordConfirmComponent } from './Account/password-confirm/password-confirm.component';
 import { DashboardComponent } from './Admin/dashboard/dashboard.component';
+import { HasRoleDirective } from './_directives/has-role.directive';
 @NgModule({
   declarations: [
     AppComponent,
@@ -26,7 +27,8 @@ import { DashboardComponent } from './Admin/dashboard/dashboard.component';
     RegisterConfirmComponent,
     ForgetPasswordComponent,
     PasswordConfirmComponent,
-    DashboardComponent
+    DashboardComponent,
+    HasRoleDirective
   ],
   imports: [
     BrowserModule,
