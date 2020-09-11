@@ -8,8 +8,11 @@ import { Component, OnInit } from '@angular/core';
 export class DashboardComponent implements OnInit {
 
   constructor() { }
-
+isUsersList:boolean;
   ngOnInit(): void {
+    this.isUsersList=false;
   }
-
+  ShowUsers():boolean{
+    return this.isUsersList=true;
+  }
 }

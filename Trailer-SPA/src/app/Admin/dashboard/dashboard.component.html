@@ -21,9 +21,9 @@
               <div class="icon"><i class="fa fa-laptop"></i></div>
               <div class="title">Dashboard</div>
               </a></li>  
-          <li><a href="#" >
-              <div class="icon"><i class="fa fa-newspaper"></i></div>
-              <div class="title">Jobs</div>
+          <li><a style="cursor: pointer;" (click)="ShowUsers()">
+              <div style="cursor: pointer;" class="icon"><i class="fa fa-newspaper"></i></div>
+              <div style="cursor: pointer;" class="title" >View All Users</div>
               </a></li>  
           <li><a href="#">
               <div class="icon"><i class="fa fa-file-alt"></i></div>
@@ -40,24 +40,10 @@
         </ul>
       </div>
     </div>
-    <!-- <div class="main_container">
-      <div class="top_navbar">
-          <div class="hamburger">
-              <div class="hamburger__inner">
-                  <i class="fas fa-bars"></i>  
-              </div>  
-          </div>
-         <ul class="menu">
-            <li><a href="#" class="active">Blogs</a></li>
-            <li><a href="#">Contact</a></li>
-            <li><a href="#">About</a></li>
-         </ul>
-         <ul class="right_bar">
-            <li><i class="fas fa-search"></i></li>
-            <li><i class="fas fa-sign-out-alt"></i></li> 
-         </ul>
-      </div>
-    
+    <div class="main_container">
+     <div *ngIf="isUsersList">
+    <app-users> </app-users>
+     </div>
       
-    </div> -->
+    </div>
 </div>
