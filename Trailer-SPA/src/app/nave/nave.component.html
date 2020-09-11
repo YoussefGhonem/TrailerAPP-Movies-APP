@@ -30,7 +30,7 @@
 	</div>
 </div>
 
-<header class="ht-header">
+<header class="ht-header common-hero">
 	<div class="container">
 		<nav class="navbar navbar-default navbar-custom">
 			<!-- Brand and toggle get grouped for better mobile display -->
@@ -57,7 +57,7 @@
 							Home
 						</a>
 					</li>
-					<li *hasRole="['User']" class="dropdown first">
+					<li  class="dropdown first">
 						<a class="btn btn-default dropdown-toggle lv1" data-toggle="dropdown" data-hover="dropdown">
 							movies<i class="fa fa-angle-down" aria-hidden="true"></i>
 						</a>
@@ -74,6 +74,11 @@
 							<li><a href="moviesingle.html">Movie single</a></li>
 							<li class="it-last"><a href="seriessingle.html">Series single</a></li>
 						</ul>
+					</li>
+					<li class="dropdown first"  *ngIf="isUserRegistered()">
+						<a  *hasRole="['Admin']" routerLink="admindashboard" class="btn btn-default dropdown-toggle lv1" data-toggle="dropdown" data-hover="dropdown">
+							Managment
+						</a>
 					</li>
 					<li class="dropdown first">
 						<a class="btn btn-default dropdown-toggle lv1" data-toggle="dropdown" data-hover="dropdown">
@@ -108,19 +113,10 @@
 						</ul>
 					</li>
 				</ul>
-				<ul class="nav navbar-nav flex-child-menu menu-right">
-					<li class="dropdown first">
-						<a class="btn btn-default dropdown-toggle lv1" data-toggle="dropdown" data-hover="dropdown">
-							pages <i class="fa fa-angle-down" aria-hidden="true"></i>
-						</a>
-						<ul class="dropdown-menu level1">
-							<li><a href="landing.html">Landing</a></li>
-							<li><a href="404.html">404 Page</a></li>
-							<li class="it-last"><a href="comingsoon.html">Coming soon</a></li>
-						</ul>
-					</li>
+				<ul  class="nav navbar-nav flex-child-menu menu-right">
+
 					<li><a (click)="logout()" *ngIf="isUserRegistered()">Log-Out</a></li>
-					<li class="loginLink" *ngIf="!isUserRegistered()"><a href="#">LOG In</a></li>
+					<li class="loginLink" *ngIf="!isUserRegistered()"><a>LOG In</a></li>
 					<li class="btn signupLink" *ngIf="!isUserRegistered()"><a>sign up</a></li>
 				</ul>
 			</div>
@@ -131,15 +127,16 @@
 
 	</div>
 </header>
+
 <div class=" common-hero">
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12">
 				<div class="hero-ct">
-					<h1>celebrity listing - list</h1>
+					<h1></h1>
 					<ul class="breadcumb">
-						<li class="active"><a href="#">Home</a></li>
-						<li> <span class="ion-ios-arrow-right"></span> celebrity listing</li>
+						<li class="active"><a href="#"></a></li>
+						<li> <span class="ion-ios-arrow-right"></span> </li>
 					</ul>
 				</div>
 			</div>

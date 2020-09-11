@@ -7788,7 +7788,7 @@ p.ceb-single {
   border-color: #d0dae4;
 }
 header {
-  position: absolute;
+  position: fixed;
   z-index: 100;
   width: 100%;
   background-color: transparent;

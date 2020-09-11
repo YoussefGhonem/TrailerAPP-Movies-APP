@@ -15,6 +15,7 @@ export class HasRoleDirective implements OnInit{
 
   ngOnInit() {
    const role = this.serivce.Decrypt(localStorage.getItem('role'));
+
    if(role == this.hasRole){
      if(!this.isVisible){
        this.isVisible=true;

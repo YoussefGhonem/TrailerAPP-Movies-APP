@@ -148,6 +148,8 @@ namespace Trailer.API.Controllers
             var user = await _userManager.FindByEmailAsync(userLoginDto.Email);
             if (user == null)
                 return NotFound("Email or Password Not Found Please Try Again");
+            // if (user.PasswordHash != userLoginDto.Password)
+            //     return NotFound("Password Not Found Please Try Again");
             if (!user.EmailConfirmed) // if user not confirm his email
                 return Unauthorized("Email not confirm yet");
 
@@ -184,7 +186,8 @@ namespace Trailer.API.Controllers
             {
                 return Unauthorized("the account has been temporarily blocked");
             }
-            return StatusCode(StatusCodes.Status204NoContent);
+            // return StatusCode(StatusCodes.Status204NoContent);
+            return NotFound("Password Not Found Please Try Again");
         }
 
         [HttpGet("GetRoleName/{email}")] // علشان تجيب قيميه الصلاحيه
