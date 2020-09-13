@@ -62,12 +62,6 @@ export class RegisterComponent implements OnInit {
   }
 
 
-  validateRegisterModel() {
-    this.user.userName = this.registerForm.value.userName;
-    this.user.email = this.registerForm.value.email;
-    this.user.password = this.registerForm.value.password;
-  }
-
   isPasswordMatch() {
     if (this.registerForm.value.password !== '' && this.registerForm.value.passwordConfirm !== '') {
       if ((this.registerForm.value.password !== this.registerForm.value.passwordConfirm) &&
@@ -122,7 +116,7 @@ export class RegisterComponent implements OnInit {
     if (email != null && email != '' && this.isBusy ===false) {
       this.authService.EmailExits(email).subscribe(x => {
         this.messageValidate.email.matchEmail = 'This email is used';
-      }, ex => this.alertify.warning(ex));
+      }, ex => console.log(ex));
       return true;
     } else {
       this.messageValidate.email.matchEmail = null;
@@ -135,7 +129,7 @@ export class RegisterComponent implements OnInit {
     if (userName != null && userName != '' && this.isBusy === false) {
       this.authService.userNameExits(userName).subscribe(x => {
         this.messageValidate.userName.matchuserName = 'This User Name is used';
-      }, ex => this.alertify.warning(ex));
+      }, ex => console.log(ex));
       return true;
     } else {
       this.messageValidate.userName.matchuserName = null;

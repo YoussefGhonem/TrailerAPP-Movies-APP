@@ -149,3 +149,25 @@ h2{
   background-color: #008CBA;
   color: white;
 }
+.addbutton {
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  padding: 5px 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 15px;
+  margin: 4px 2px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+}
+.addbutton2 {
+  background-color: white; 
+  color: black; 
+  border: 2px solid #4FC3A1;
+}
+.addbutton2:hover {
+  background-color: green;
+  color: white;
+}

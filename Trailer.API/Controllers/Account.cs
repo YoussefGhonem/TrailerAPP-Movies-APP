@@ -342,7 +342,7 @@ namespace Trailer.API.Controllers
             {
                 return StatusCode(StatusCodes.Status200OK);
             }
-            return NoContent();
+            return StatusCode(StatusCodes.Status400BadRequest);
         }
 
         [HttpGet("usernameexits")]
@@ -353,7 +353,7 @@ namespace Trailer.API.Controllers
             {
                 return StatusCode(StatusCodes.Status200OK);
             }
-            return NoContent();
+            return StatusCode(StatusCodes.Status400BadRequest);
         }
 
         [HttpGet("ForgetPassword/{email}")]

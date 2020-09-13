@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { User } from '../_models/user';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Users } from '../_models/users';
+import { UserModel } from '../_models/UserModel';
 @Injectable({
   providedIn: 'root'
 })
@@ -16,8 +17,12 @@ baseURL=environment.apiUrl+'admin/';
     }),
     withCredentials: true,
   };
-
+  
   GetAllUsers():Observable<Users[]>{
     return this.http.get<Users[]>(this.baseURL+'GetUsers',this.headers).pipe();
   }
+  AddUser(model: UserModel){
+    return this.http.post<UserModel>(this.baseURL + 'AddUser', model, this.headers);
+  }
+
 }

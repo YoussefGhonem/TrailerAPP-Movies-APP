@@ -1,3 +1,4 @@
+using AngularToAPI.ModelViews.users;
 using AutoMapper;
 using Trailer.API.Dtos;
 using Trailer.API.Models;
@@ -9,6 +10,7 @@ namespace Trailer.API.Helpers
         public AutoMapperProfiles ()
         {
             CreateMap<UserRegisterDto,User>();
+            CreateMap<AddUserModel,User>();
         }
     }
 }

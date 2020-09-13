@@ -1,24 +1,8 @@
-<!-- <div class="container">
-    <h2>Responsive Tables Using LI <small>Triggers on 767px</small></h2>
-    <ul class="responsive-table">
-      <li class="table-header">
-        <div class="col col-1">UserName</div>
-        <div class="col col-2">Email </div>
-        <div class="col col-3">Phone Number</div>
-        <div class="col col-4">Country</div>
-        
-      </li>
 
-      <li class="table-row" *ngFor="let user of users">
-        <div class="col col-1" data-label="Job Id">{{user.userName}}</div>
-        <div class="col col-2" data-label="Customer Name">{{user.email}}</div>
-        <div class="col col-3" data-label="Amount">{{user.phoneNumber}}</div>
-        <div class="col col-4" data-label="Payment Status">{{user.country}}</div>
-      </li>
-    </ul>
-  </div> -->
-  <h2>Responsive Table</h2>
+  
   <div class="table-wrapper">
+    <h1 style="    text-align: center;">Show All Users</h1>
+    <button class="addbutton addbutton2"><a routerLink="adduser">Add New User</a></button>
       <table class="fl-table">
           <thead>
           <tr>
@@ -35,7 +19,7 @@
               <td>{{user.email}}</td>
               <td>{{user.phoneNumber}}</td>
               <td>{{user.country}}</td>
-              <td><button class="button button2">Edit</button></td>
+              <td><button class="button button2"  >Edit</button></td>
           </tr>
           <tbody>
       </table>

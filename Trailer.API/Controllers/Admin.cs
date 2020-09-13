@@ -21,12 +21,13 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.WebUtilities;
+using AngularToAPI.ModelViews.users;
 
 namespace Trailer.API.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    [Authorize(Roles="Admin")]
+    [Authorize(Roles = "Admin")]
     public class AdminController : ControllerBase
     {
         private readonly IAdminRepo _Repo;
@@ -37,10 +38,22 @@ namespace Trailer.API.Controllers
         }
 
         [HttpGet("GetUsers")]
-        public async Task<IEnumerable<User>> GetUsers(){
-            var users=await _Repo.GetUsers();
-            if(users==null)return null;
+        public async Task<IEnumerable<User>> GetUsers()
+        {
+            var users = await _Repo.GetUsers();
+            if (users == null) return null;
             return users;
+        }
+
+        [HttpPost("AddUser")]
+        public async Task<IActionResult> AddUser(AddUserModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = await _Repo.AddUser(model);
+                if (user != null) return Ok();
+            }
+            return BadRequest();
         }
     }
 }

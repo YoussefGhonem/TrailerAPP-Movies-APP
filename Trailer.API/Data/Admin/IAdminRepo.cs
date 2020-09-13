@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
+using AngularToAPI.ModelViews.users;
 using Trailer.API.Models;
 namespace Trailer.API.Data
 {
@@ -9,6 +10,7 @@ namespace Trailer.API.Data
     {
         
         public Task<IEnumerable<User>> GetUsers();
+         Task<User> AddUser(AddUserModel model);
         
     }
 }

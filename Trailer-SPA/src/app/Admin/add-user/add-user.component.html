@@ -1,48 +1,80 @@
-<div class="wrapper" id="app">
-    <div class="card-form">
- 
-      <div class="card-form__inner">
-        <div class="card-input">
-          <label for="cardNumber" class="card-input__label">Card Number</label>
-          <input type="text" id="cardNumber" class="card-input__input" v-mask="generateCardNumberMask" v-model="cardNumber" v-on:focus="focusInput" v-on:blur="blurInput" data-ref="cardNumber" autocomplete="off">
-        </div>
-        <div class="card-input">
-          <label for="cardName" class="card-input__label">Card Holders</label>
-          <input type="text" id="cardName" class="card-input__input" v-model="cardName" v-on:focus="focusInput" v-on:blur="blurInput" data-ref="cardName" autocomplete="off">
-        </div>
-        <div class="card-form__row">
-          <div class="card-form__col">
-            <div class="card-form__group">
-              <label for="cardMonth" class="card-input__label">Expiration Date</label>
-              <select class="card-input__input -select" id="cardMonth" v-model="cardMonth" v-on:focus="focusInput" v-on:blur="blurInput" data-ref="cardDate">
-                <option value="" disabled selected>Month</option>
-                <option v-bind:value="n < 10 ? '0' + n : n" v-for="n in 12" v-bind:disabled="n < minCardMonth" v-bind:key="n">
-                   iik
-                </option>
-              </select>
-              <select class="card-input__input -select" id="cardYear" v-model="cardYear" v-on:focus="focusInput" v-on:blur="blurInput" data-ref="cardDate">
-                <option value="" disabled selected>Year</option>
-                <option v-bind:value="$index + minCardYear" v-for="(n, $index) in 12" v-bind:key="n">
-                    ghg
-                </option>
-              </select>
-            </div>
-          </div>
-          <div class="card-form__col -cvv">
-            <div class="card-input">
-              <label for="cardCvv" class="card-input__label">CVV</label>
-              <input type="text" class="card-input__input" id="cardCvv" v-mask="'####'" maxlength="4" v-model="cardCvv" v-on:focus="flipCard(true)" v-on:blur="flipCard(false)" autocomplete="off">
-            </div>
-          </div>
-        </div>
 
-        <button class="card-form__button">
-          Submit
-        </button>
+<div class="form_wrapper">
+  <div class="form_container">
+    <div class="title_container">
+      <h2>Ad New User</h2>
+    </div>
+    <div class="row clearfix">
+      <div class="">
+        <form [formGroup]="userForm" (ngSubmit)="createUser()">
+
+          <div class="row clearfix">
+            <div class="col_half">
+              <div class="input_field"> <span><i aria-hidden="true" class="fa fa-user"></i></span>
+                <input type="text" name="name" placeholder="User Name" formControlName="userName" (blur)="isUserNameExist()"/>
+                <div style="color: crimson;"
+                *ngIf="this.userForm.get('userName').touched  && this.userForm.get('userName').hasError('required')">
+                required</div>
+              <div style="color: crimson;"
+                *ngIf="this.userForm.get('userName').value!==null  && this.userForm.get('userName').value!==''">
+                {{messageValidate.userName.matchuserName}}
+              </div>
+              </div>
+            </div>
+            <div class="col_half">
+              <div class="input_field"> <span><i aria-hidden="true" class="fa fa-user"></i></span>
+                <input type="text" name="phoneNumber" placeholder="Phone Number" formControlName="phoneNumber" />
+                <div style="color: crimson;"
+                *ngIf="this.userForm.get('phoneNumber').touched && this.userForm.get('phoneNumber').hasError('required')">
+                required</div>
+              </div>
+            </div>
+          </div>
+          <div class="input_field"> <span><i aria-hidden="true" class="fa fa-envelope"></i></span>
+            <input type="email" name="email" placeholder="Email" formControlName="email" (blur)="isEmailExist()" />
+            <div style="color: crimson;"
+            *ngIf="userForm.get('email').touched && userForm.get('email').hasError('required')">
+            required</div>
+          <div style="color: crimson;" *ngIf="this.userForm.get('email').hasError('email')">
+            Email No Valid</div>
+  
+          <div style="color: crimson;"
+            *ngIf="this.userForm.get('email').value!==null  && this.userForm.get('email').value!==''">
+            {{messageValidate.email.matchEmail}} </div>
+          </div>
+
+
+          <div class="input_field"> <span><i aria-hidden="true" class="fa fa-lock"></i></span>
+            <input type="password" name="password" placeholder="Password" formControlName="password" />
+            <div style="color: crimson;"
+          *ngIf="this.userForm.get('password').touched && this.userForm.get('password').hasError('required')">
+          required</div>
+          </div>
+          <div class="input_field"> <span><i aria-hidden="true" class="fa fa-lock"></i></span>
+            <input type="password" name="passwordConfirm" placeholder="Re-type Password" formControlName="passwordConfirm"/>
+            <div style="color: crimson;"
+            *ngIf="this.userForm.get('passwordConfirm').touched && this.userForm.get('passwordConfirm').hasError('required')">
+            required</div>
+          <div style="color: crimson;" *ngIf="isPasswordMatch()">
+            Not Match</div>
+          </div>
+
+
+          <div class="row clearfix">
+            <div class="col_half">
+              <div class="input_field"> <span><i aria-hidden="true" class="fa fa-user"></i></span>
+                <input type="text" name="country" placeholder="Country" formControlName="country" />
+              </div>
+            </div>
+          </div>
+            <div class="input_field checkbox_option">
+            	<input formControlName="emailConfirmed" type="checkbox" id="cb1">
+    			<label for="cb1">Activate Email</label>
+            </div>
+
+          <button type="submit" class="button" [disabled]="userForm.invalid || isPasswordMatch()">Ad New User</button>
+        </form>
       </div>
     </div>
-    
-    <a href="https://github.com/muhammederdem/credit-card-form" target="_blank" class="github-btn">
-      See on GitHub
-    </a>
   </div>
+</div>
