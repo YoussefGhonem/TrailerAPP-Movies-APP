@@ -55,5 +55,35 @@ namespace Trailer.API.Controllers
             }
             return BadRequest();
         }
+        
+        [HttpGet("GetUser/{id}")]
+        public async Task<ActionResult<User>> GetUser(string id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+            var user = await _Repo.GetUser(id);
+            if (user != null)
+            {
+                return user;
+            }
+            return BadRequest();
+        }
+               
+        [HttpPut("EditUser")]
+        public async Task<ActionResult<User>> EditUser(EditUserModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+            var user = await _Repo.EditUser(model);
+            if (user != null)
+            {
+                return user;
+            }
+            return BadRequest();
+        }
     }
 }

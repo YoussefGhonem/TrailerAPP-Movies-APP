@@ -19,7 +19,7 @@
               <td>{{user.email}}</td>
               <td>{{user.phoneNumber}}</td>
               <td>{{user.country}}</td>
-              <td><button class="button button2"  >Edit</button></td>
+              <td><button class="button button2" (click)="EditUserURL(user.id)" >Edit</button></td>
           </tr>
           <tbody>
       </table>

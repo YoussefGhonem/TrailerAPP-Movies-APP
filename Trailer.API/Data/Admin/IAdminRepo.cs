@@ -11,6 +11,8 @@ namespace Trailer.API.Data
         
         public Task<IEnumerable<User>> GetUsers();
          Task<User> AddUser(AddUserModel model);
+         Task<User> GetUser(string id );
+         Task<User> EditUser(EditUserModel model );
         
     }
 }

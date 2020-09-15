@@ -19,6 +19,7 @@ const routes: Routes = [
   {path:'admindashboard',component:DashboardComponent},
   {path:'users',component:UsersComponent},
   {path:'adduser',component:AddUserComponent},
+  {path:'edituser/:id',component:AddUserComponent},
 ];
 
 @NgModule({

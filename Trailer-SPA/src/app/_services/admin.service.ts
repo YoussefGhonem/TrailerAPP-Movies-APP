@@ -5,24 +5,31 @@ import { User } from '../_models/user';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Users } from '../_models/users';
 import { UserModel } from '../_models/UserModel';
+import { EditUserModel } from '../_models/EditUserModel';
 @Injectable({
   providedIn: 'root'
 })
 export class AdminService {
-baseURL=environment.apiUrl+'admin/';
-  constructor(private http:HttpClient) { }
+  baseURL = environment.apiUrl + 'admin/';
+  constructor(private http: HttpClient) { }
   headers = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json'
     }),
     withCredentials: true,
   };
-  
-  GetAllUsers():Observable<Users[]>{
-    return this.http.get<Users[]>(this.baseURL+'GetUsers',this.headers).pipe();
+
+  GetAllUsers(): Observable<Users[]> {
+    return this.http.get<Users[]>(this.baseURL + 'GetUsers', this.headers).pipe();
   }
-  AddUser(model: UserModel){
+  AddUser(model: UserModel) {
     return this.http.post<UserModel>(this.baseURL + 'AddUser', model, this.headers);
   }
+  EditUser(model: EditUserModel): Observable<Users> {
+    return this.http.put<Users>(this.baseURL + 'EditUser', model, this.headers).pipe();
+  }
 
+  GetUser(id: string): Observable<Users> {
+    return this.http.get<Users>(this.baseURL + 'GetUser/' + id, this.headers).pipe();
+  }
 }

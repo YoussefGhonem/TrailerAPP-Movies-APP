@@ -11,6 +11,7 @@ namespace Trailer.API.Helpers
         {
             CreateMap<UserRegisterDto,User>();
             CreateMap<AddUserModel,User>();
+            CreateMap<EditUserModel,User>();
         }
     }
 }

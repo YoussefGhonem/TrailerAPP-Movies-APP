@@ -2,7 +2,7 @@
 <div class="form_wrapper">
   <div class="form_container">
     <div class="title_container">
-      <h2>Ad New User</h2>
+      <h2>{{title}}</h2>
     </div>
     <div class="row clearfix">
       <div class="">
@@ -72,7 +72,7 @@
     			<label for="cb1">Activate Email</label>
             </div>
 
-          <button type="submit" class="button" [disabled]="userForm.invalid || isPasswordMatch()">Ad New User</button>
+          <button type="submit" class="button" [disabled]="userForm.invalid || isPasswordMatch()|| isEmailExist()|| isUserNameExist()">Submit</button>
         </form>
       </div>
     </div>
