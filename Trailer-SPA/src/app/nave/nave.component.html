@@ -52,8 +52,8 @@
 					<li class="hidden">
 						<a href="#page-top"></a>
 					</li>
-					<li routerLink="home" class="dropdown first">
-						<a class="btn btn-default dropdown-toggle lv1" data-toggle="dropdown">
+					<li  class="dropdown first">
+						<a [routerLink]="['home']" class="btn btn-default dropdown-toggle lv1" data-toggle="dropdown">
 							Home
 						</a>
 					</li>
@@ -85,7 +85,7 @@
 										class="ion-ios-arrow-forward"></i></a>
 								<ul class="dropdown-menu level2">
 									<li><a routerLink="users">View All Users</a></li>
-									<li><a routerLink="adduser">Add User</a></li>
+									<li><a  [routerLink]="['/adduser']" >Add User</a></li>
 								</ul>
 							</li>
 							<li class="it-last"><a href="seriessingle.html">Series single</a></li>

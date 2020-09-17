@@ -32,4 +32,7 @@ export class AdminService {
   GetUser(id: string): Observable<Users> {
     return this.http.get<Users>(this.baseURL + 'GetUser/' + id, this.headers).pipe();
   }
+  DeleteAll(ids: string[]) {
+    return this.http.post(this.baseURL + 'DeleteUsers', ids, this.headers).pipe();
+  }
 }

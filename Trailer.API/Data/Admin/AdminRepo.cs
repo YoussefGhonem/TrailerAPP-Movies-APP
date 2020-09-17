@@ -47,6 +47,30 @@ namespace Trailer.API.Data
             return null;
         }
 
+        public async Task<bool> DeleteUserList(List<string> ids)
+        {
+            if (ids.Count < 1)
+            {
+                return false;
+            }
+            var i = 0;
+            foreach (string id in ids)
+            {
+                var user = await _db.Users.FirstOrDefaultAsync(x => x.Id == id);
+                if (user == null)
+                {
+                    return false;
+                }
+                _db.Users.Remove(user);
+                i++;
+            }
+            if (i > 0)
+            {
+                await _db.SaveChangesAsync();
+            }
+            return true;
+        }
+
         public async Task<User> EditUser(EditUserModel model)
         {
             if (model.Id == null)

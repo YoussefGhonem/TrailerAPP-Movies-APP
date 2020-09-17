@@ -1,26 +1,50 @@
-
-  
-  <div class="table-wrapper">
+<div class="table-wrapper" style="font-size: 24px;">
     <h1 style="    text-align: center;">Show All Users</h1>
-    <button class="addbutton addbutton2"><a routerLink="adduser">Add New User</a></button>
-      <table class="fl-table">
-          <thead>
-          <tr>
-              <th>UserName</th>
-              <th>Email</th>
-              <th>Phone Number</th>
-              <th>Country</th>
-              <th>Control</th>
-          </tr>
-          </thead>
-          <tbody>
-          <tr *ngFor="let user of users">
-              <td>{{user.userName}}</td>
-              <td>{{user.email}}</td>
-              <td>{{user.phoneNumber}}</td>
-              <td>{{user.country}}</td>
-              <td><button class="button button2" (click)="EditUserURL(user.id)" >Edit</button></td>
-          </tr>
-          <tbody>
-      </table>
-  </div>
+    <button class="addbutton addbutton2"><a href="adduser">Add New User</a></button>
+
+
+    <i (click)="DeleteCount()" *ngIf="IsDelete()" style="padding-left: 2%;color: brown; cursor: pointer;"
+        class="fa fa-trash fa-10x"></i>
+
+    <table id="tbl" class="fl-table">
+        <thead>
+            <tr>
+                <th>
+                    <input style="cursor: pointer" type="checkbox" class="ckheader" (change)="SelectAll()">
+                </th>
+                <th>UserName</th>
+                <th>Email</th>
+                <th>Phone Number</th>
+                <th>Country</th>
+                <th>Control</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let user of users">
+                <td><input style="cursor: pointer;" type="checkbox" class="ckitem" value="{{user.id}}"></td>
+                <td>{{user.userName}}</td>
+                <td>{{user.email}}</td>
+                <td>{{user.phoneNumber}}</td>
+                <td>{{user.country}}</td>
+                <td><button class="button button2" (click)="EditUserURL(user.id)">
+                        <i class="fa fa-edit"></i></button>
+                    <button class="Deletebutton Deletebutton2" (click)="DeleteConfirm()">
+                        <i class="fa fa-user-times"></i></button></td>
+            </tr>
+        <tbody>
+    </table>
+</div>
+<!-- The Modal -->
+
+<!-- MODAL BUTTON -->
+<div id="modal-btn">
+    <button id="btn" (click)="DeleteCount()" [disabled]="!IsDelete()"> Delete</button>
+
+    <div id="content">
+        <i id="close" class="fa fa-window-close">Close</i>
+        <p>Are You Sure To Delet This!</p>
+        <button id="close-btn" (click)="DeleteConfirm()">Yes</button>
+
+    </div>
+
+</div>

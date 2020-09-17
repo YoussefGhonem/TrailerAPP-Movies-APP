@@ -85,5 +85,20 @@ namespace Trailer.API.Controllers
             }
             return BadRequest();
         }
+        [HttpPost("DeleteUsers")]
+        public async Task<ActionResult<User>> DeleteUsers(List<string> ids)
+        {
+                       if (ids.Count < 1)
+            {
+                return BadRequest();
+            }
+
+            var result = await _Repo.DeleteUserList(ids);
+            if (result)
+            {
+                return Ok();
+            }
+            return BadRequest();
+        }
     }
 }

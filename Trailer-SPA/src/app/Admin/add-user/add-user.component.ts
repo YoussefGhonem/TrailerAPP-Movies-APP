@@ -169,8 +169,12 @@ export class AddUserComponent implements OnInit {
         this.messageValidate.userName.matchuserName = 'This User Name is used';
       }, ex => console.log(ex));
       return true;
-    } else {
-      this.messageValidate.userName.matchuserName = null;
+    } else if(this.isEditMode ) {
+      for (const item of this.users.values()) {
+        if (this.isEditMode && item.userName === userName  && item.id !== this.userData.id) {
+          this.messageValidate.userName.matchuserName = 'This User Name is used';
+        }
+      }
     }
     return false;
   }
