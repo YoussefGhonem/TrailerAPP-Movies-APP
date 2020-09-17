@@ -1,0 +1,22 @@
+<div class="table-wrapper" style="font-size: 24px;">
+    <h1 style="    text-align: center;">Show All User Roles</h1>
+    <table  class="fl-table">
+        <thead>
+            <tr>
+
+                <th>UserName</th>
+                <th>Role Name</th>
+                <th>Control</th>
+               
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let user of userRoles">
+                <td>{{user.userName}}</td>
+                <td>{{user.roleName}}</td>
+                <td><button class="button button2">
+                        <i class="fa fa-edit"></i></button></td>
+            </tr>
+        <tbody>
+    </table>
+</div>

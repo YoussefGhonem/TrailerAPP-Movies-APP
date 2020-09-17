@@ -18,6 +18,7 @@ import { DashboardComponent } from './Admin/dashboard/dashboard.component';
 import { HasRoleDirective } from './_directives/has-role.directive';
 import { UsersComponent } from './Admin/users/users.component';
 import { AddUserComponent } from './Admin/add-user/add-user.component';
+import { UserRolesComponent } from './Admin/user-roles/user-roles.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -32,7 +33,8 @@ import { AddUserComponent } from './Admin/add-user/add-user.component';
     DashboardComponent,
     HasRoleDirective,
     UsersComponent,
-    AddUserComponent
+    AddUserComponent,
+    UserRolesComponent
   ],
   imports: [
     BrowserModule,

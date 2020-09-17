@@ -124,6 +124,37 @@ namespace Trailer.API.Data
             return user;
         }
 
+        public async Task<IEnumerable<UserRolesModel>> GetUserRoles()
+        {
+            var query=await(
+                from userRole in _db.UserRoles
+                join users in _db.Users
+                on userRole.UserId equals users.Id
+                join roles in _db.Roles
+                on userRole.RoleId equals roles.Id
+                select new {
+                    userRole.UserId,                  
+                    userRole.RoleId,
+                    users.UserName,
+                    roles.Name 
+                }).ToListAsync();           
+            List<UserRolesModel> userRolesModels = new List<UserRolesModel>();
+                        if (query.Count > 0)
+            {
+                for (int i = 0; i < query.Count; i++)
+                {
+                    var model = new UserRolesModel
+                    {
+                        UserId = query[i].UserId,
+                        UserName = query[i].UserName,
+                        RoleId = query[i].RoleId,
+                        RoleName = query[i].Name
+                    };
+                    userRolesModels.Add(model);
+                }
+            }
+            return userRolesModels;
+        }
 
         public async Task<IEnumerable<User>> GetUsers()
         {

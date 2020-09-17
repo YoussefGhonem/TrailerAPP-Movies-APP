@@ -100,5 +100,16 @@ namespace Trailer.API.Controllers
             }
             return BadRequest();
         }
+
+        [HttpGet("GetUserRoles")]
+        public async Task<IEnumerable<UserRolesModel>> GetUserRole(string id)
+        {
+            var userRoles = await _Repo.GetUserRoles();
+            if (userRoles == null)
+            {
+                return null;
+            }
+            return userRoles;
+        }
     }
 }

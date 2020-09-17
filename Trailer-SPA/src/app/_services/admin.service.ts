@@ -6,6 +6,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Users } from '../_models/users';
 import { UserModel } from '../_models/UserModel';
 import { EditUserModel } from '../_models/EditUserModel';
+import { UserRoleModel } from '../_models/UserRoleModel';
 @Injectable({
   providedIn: 'root'
 })
@@ -34,5 +35,8 @@ export class AdminService {
   }
   DeleteAll(ids: string[]) {
     return this.http.post(this.baseURL + 'DeleteUsers', ids, this.headers).pipe();
+  }
+  GetUserRoles(): Observable<UserRoleModel[]> {
+    return this.http.get<UserRoleModel[]>(this.baseURL + 'GetUserRoles' , this.headers).pipe();
   }
 }

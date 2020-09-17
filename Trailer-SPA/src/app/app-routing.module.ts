@@ -8,6 +8,7 @@ import { PasswordConfirmComponent } from './Account/password-confirm/password-co
 import { DashboardComponent } from './Admin/dashboard/dashboard.component';
 import { UsersComponent } from './Admin/users/users.component';
 import { AddUserComponent } from './Admin/add-user/add-user.component';
+import { UserRolesComponent } from './Admin/user-roles/user-roles.component';
 
 const routes: Routes = [
   {path:'',component:HomeComponent},
@@ -20,6 +21,7 @@ const routes: Routes = [
   {path:'users',component:UsersComponent},
   {path:'adduser',component:AddUserComponent},
   {path:'edituser/:id',component:AddUserComponent},
+  {path:'roles',component:UserRolesComponent},
 ];
 
 @NgModule({
