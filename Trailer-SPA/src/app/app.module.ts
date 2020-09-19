@@ -19,6 +19,10 @@ import { HasRoleDirective } from './_directives/has-role.directive';
 import { UsersComponent } from './Admin/users/users.component';
 import { AddUserComponent } from './Admin/add-user/add-user.component';
 import { UserRolesComponent } from './Admin/user-roles/user-roles.component';
+import { AuthGuardService } from './_guards/auth-guard.service';
+import { AccessDeniedComponent } from './Auth-Guard/access-denied/access-denied.component';
+import { NotFoundComponent } from './Auth-Guard/not-found/not-found.component';
+import { EditRolesComponent } from './Admin/edit-roles/edit-roles.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -34,7 +38,10 @@ import { UserRolesComponent } from './Admin/user-roles/user-roles.component';
     HasRoleDirective,
     UsersComponent,
     AddUserComponent,
-    UserRolesComponent
+    UserRolesComponent,
+    AccessDeniedComponent,
+    NotFoundComponent,
+    EditRolesComponent
   ],
   imports: [
     BrowserModule,
@@ -47,7 +54,8 @@ import { UserRolesComponent } from './Admin/user-roles/user-roles.component';
   ],
   providers: [
     AuthService,
-    AlertifyService
+    AlertifyService,
+    AuthGuardService
     
   ],
   bootstrap: [AppComponent]

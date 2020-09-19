@@ -15,6 +15,8 @@ namespace Trailer.API.Data
          Task<User> EditUser(EditUserModel model );
          Task<bool> DeleteUserList(List<string> ids);
          Task<IEnumerable<UserRolesModel>> GetUserRoles();
+         Task<IEnumerable<Role>> GetRolesc();
+         Task<bool> EditUserRole (EditUserRoleModel model);
         
     }
 }

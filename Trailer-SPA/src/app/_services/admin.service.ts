@@ -7,6 +7,8 @@ import { Users } from '../_models/users';
 import { UserModel } from '../_models/UserModel';
 import { EditUserModel } from '../_models/EditUserModel';
 import { UserRoleModel } from '../_models/UserRoleModel';
+import { RoleModel } from '../_models/RoleModel';
+import { EditUserRoleModel } from '../_models/EditUserRoleModel';
 @Injectable({
   providedIn: 'root'
 })
@@ -37,6 +39,12 @@ export class AdminService {
     return this.http.post(this.baseURL + 'DeleteUsers', ids, this.headers).pipe();
   }
   GetUserRoles(): Observable<UserRoleModel[]> {
-    return this.http.get<UserRoleModel[]>(this.baseURL + 'GetUserRoles' , this.headers).pipe();
+    return this.http.get<UserRoleModel[]>(this.baseURL + 'GetUserRoles', this.headers).pipe();
+  }
+  GelAllRoles(): Observable<RoleModel[]> {
+    return this.http.get<RoleModel[]>(this.baseURL + 'GetAllRoles', this.headers).pipe();
+  }
+  EditUserRole(model: EditUserRoleModel): Observable<EditUserRoleModel> {
+    return this.http.put<EditUserRoleModel>(this.baseURL + 'EditUserRole', model, this.headers).pipe();
   }
 }

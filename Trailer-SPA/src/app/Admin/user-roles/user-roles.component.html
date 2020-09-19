@@ -14,8 +14,7 @@
             <tr *ngFor="let user of userRoles">
                 <td>{{user.userName}}</td>
                 <td>{{user.roleName}}</td>
-                <td><button class="button button2">
-                        <i class="fa fa-edit"></i></button></td>
+                <td><button class="button button2" (click)="EditUserRoleUrl(user.userId,user.roleId)"> <i class="fa fa-edit"></i></button></td>
             </tr>
         <tbody>
     </table>

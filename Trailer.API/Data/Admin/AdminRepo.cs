@@ -160,6 +160,43 @@ namespace Trailer.API.Data
         {
             return await _db.Users.ToListAsync();
         }
+
+        public async Task<IEnumerable<Role>> GetRolesc()
+        {
+           return await _db.Roles.ToListAsync();
+        }
+
+        public async Task<bool> EditUserRole(EditUserRoleModel model)
+        {
+            if (model.UserId == null || model.RoleId == null)
+            {
+                return false;
+            }
+            var user=await _db.Users.FirstOrDefaultAsync(x=>x.Id==model.UserId);
+            if (user == null)
+            {
+                return false;
+            }
+
+            var currentRoleId = await _db.UserRoles.Where(x => x.UserId == model.UserId).Select(x => x.RoleId).FirstOrDefaultAsync();
+            var currentRoleName = await _db.Roles.Where(x => x.Id == currentRoleId).Select(x => x.Name).FirstOrDefaultAsync();
+            var newRoleName = await _db.Roles.Where(x => x.Id == model.RoleId).Select(x => x.Name).FirstOrDefaultAsync();
+
+             if (await _userManager.IsInRoleAsync(user,currentRoleName )){
+
+                var x = await _userManager.RemoveFromRoleAsync(user, currentRoleName);
+                if (x.Succeeded)
+                {
+                    var s = await _userManager.AddToRoleAsync(user, newRoleName);
+                    if (s.Succeeded)
+                    {
+                        return true;
+                    }
+                }
+             }
+
+            return false;
+        }
     }
 
 }

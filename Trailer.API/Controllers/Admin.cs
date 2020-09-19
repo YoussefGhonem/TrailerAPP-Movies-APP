@@ -88,11 +88,10 @@ namespace Trailer.API.Controllers
         [HttpPost("DeleteUsers")]
         public async Task<ActionResult<User>> DeleteUsers(List<string> ids)
         {
-                       if (ids.Count < 1)
+             if (ids.Count < 1)
             {
                 return BadRequest();
             }
-
             var result = await _Repo.DeleteUserList(ids);
             if (result)
             {
@@ -110,6 +109,31 @@ namespace Trailer.API.Controllers
                 return null;
             }
             return userRoles;
+        }
+           
+        [HttpGet("GetAllRoles")]
+        public async Task<IEnumerable<Role>> GetAllRoles()
+        {
+            var roles = await _Repo.GetRolesc();
+            if (roles == null)
+            {
+                return null;
+            }
+            return roles;
+        }
+        
+        [HttpPut("EditUserRole")]
+        public async Task<IActionResult> EditUserRole(EditUserRoleModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var x = await _Repo.EditUserRole(model);
+                if (x)
+                {
+                    return Ok();
+                }
+            }
+            return BadRequest();
         }
     }
 }

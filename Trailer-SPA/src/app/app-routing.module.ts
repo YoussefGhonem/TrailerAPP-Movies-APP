@@ -9,6 +9,10 @@ import { DashboardComponent } from './Admin/dashboard/dashboard.component';
 import { UsersComponent } from './Admin/users/users.component';
 import { AddUserComponent } from './Admin/add-user/add-user.component';
 import { UserRolesComponent } from './Admin/user-roles/user-roles.component';
+import { AccessDeniedComponent } from './Auth-Guard/access-denied/access-denied.component';
+import { NotFoundComponent } from './Auth-Guard/not-found/not-found.component';
+import { AuthGuardService } from './_guards/auth-guard.service';
+import { EditRolesComponent } from './Admin/edit-roles/edit-roles.component';
 
 const routes: Routes = [
   {path:'',component:HomeComponent},
@@ -17,11 +21,14 @@ const routes: Routes = [
   {path:'registerconfirm',component:RegisterConfirmComponent},
   {path:'forgetpassword',component:ForgetPasswordComponent},
   {path:'passwordconfirm',component:PasswordConfirmComponent},
-  {path:'admindashboard',component:DashboardComponent},
-  {path:'users',component:UsersComponent},
-  {path:'adduser',component:AddUserComponent},
-  {path:'edituser/:id',component:AddUserComponent},
-  {path:'roles',component:UserRolesComponent},
+  {path:'admindashboard',component:DashboardComponent,canActivate:[AuthGuardService]},
+  {path:'users',component:UsersComponent,canActivate:[AuthGuardService]},
+  {path:'adduser',component:AddUserComponent,canActivate:[AuthGuardService]},
+  {path:'edituser/:id',component:AddUserComponent,canActivate:[AuthGuardService]},
+  {path:'roles',component:UserRolesComponent,canActivate:[AuthGuardService]},
+  {path:'accessdenied',component:AccessDeniedComponent},
+  {path:'notfound',component:NotFoundComponent},
+  {path:'edituserrole/:id/:id1',component:EditRolesComponent},
 ];
 
 @NgModule({

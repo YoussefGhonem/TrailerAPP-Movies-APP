@@ -1,0 +1,32 @@
+
+<div class="form_wrapper">
+    <div class="form_container">
+      <div class="title_container">
+        <h2>{{title}}</h2>
+      </div>
+      <div class="row clearfix">
+        <div class="">
+          <form [formGroup]="userForm" (ngSubmit)="EditRoles()">
+  
+            <div class="row clearfix">
+              <div class="col_half">
+                <div class="input_field"> <span><i aria-hidden="true" class="fa fa-user"></i></span>
+                  <input type="text" name="name" placeholder="User Name" formControlName="userName"/>
+                </div>
+              </div>
+              <div class="col_half">
+                <div class="custom-select" style="width:200px;">
+                    <select formControlName="roleName" name="roleName" (change)="onRolesChange()">
+                      <option *ngFor="let item of roles" [value]="item.id">{{item.name}}</option>
+
+                    </select>
+                  </div>
+              </div>
+            </div>
+            <button type="submit" class="button" [disabled]="userForm.invalid">Submit</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  
