@@ -42,7 +42,7 @@ namespace Trailer.API.Controllers
         IEmailService iEmailService, SignInManager<User> signInManager, RoleManager<Role> roleManager)
         {
             _db = db;
-            _Repo = Repo;
+             _Repo = Repo;
             _mapper = mapper;
             _iEmailService = iEmailService;
             _signInManager = signInManager;
@@ -50,6 +50,7 @@ namespace Trailer.API.Controllers
             _roleManager = roleManager;
 
         }
+
         [HttpPost("register")]
         public async Task<IActionResult> Register(UserRegisterDto userRegisterDto)
         {
@@ -76,7 +77,6 @@ namespace Trailer.API.Controllers
                     //     ID = userToCreate.Id,
                     //     Token = HttpUtility.UrlEncode(token)
                     // }, Request.Scheme, Request.Host.ToString());
-
                     // 1- Send Confirmation Link To Angular
                     var encodeToken = Encoding.UTF8.GetBytes(token);
                     var newToken = WebEncoders.Base64UrlEncode(encodeToken);

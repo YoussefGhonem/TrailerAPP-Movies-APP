@@ -1,12 +1,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AngularToAPI.Models;
 using AngularToAPI.ModelViews.users;
 using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Trailer.API.Dtos;
 using Trailer.API.Models;
 
 namespace Trailer.API.Data
@@ -126,20 +128,21 @@ namespace Trailer.API.Data
 
         public async Task<IEnumerable<UserRolesModel>> GetUserRoles()
         {
-            var query=await(
+            var query = await (
                 from userRole in _db.UserRoles
                 join users in _db.Users
                 on userRole.UserId equals users.Id
                 join roles in _db.Roles
                 on userRole.RoleId equals roles.Id
-                select new {
-                    userRole.UserId,                  
+                select new
+                {
+                    userRole.UserId,
                     userRole.RoleId,
                     users.UserName,
-                    roles.Name 
-                }).ToListAsync();           
+                    roles.Name
+                }).ToListAsync();
             List<UserRolesModel> userRolesModels = new List<UserRolesModel>();
-                        if (query.Count > 0)
+            if (query.Count > 0)
             {
                 for (int i = 0; i < query.Count; i++)
                 {
@@ -163,7 +166,7 @@ namespace Trailer.API.Data
 
         public async Task<IEnumerable<Role>> GetRolesc()
         {
-           return await _db.Roles.ToListAsync();
+            return await _db.Roles.ToListAsync();
         }
 
         public async Task<bool> EditUserRole(EditUserRoleModel model)
@@ -172,7 +175,7 @@ namespace Trailer.API.Data
             {
                 return false;
             }
-            var user=await _db.Users.FirstOrDefaultAsync(x=>x.Id==model.UserId);
+            var user = await _db.Users.FirstOrDefaultAsync(x => x.Id == model.UserId);
             if (user == null)
             {
                 return false;
@@ -182,7 +185,8 @@ namespace Trailer.API.Data
             var currentRoleName = await _db.Roles.Where(x => x.Id == currentRoleId).Select(x => x.Name).FirstOrDefaultAsync();
             var newRoleName = await _db.Roles.Where(x => x.Id == model.RoleId).Select(x => x.Name).FirstOrDefaultAsync();
 
-             if (await _userManager.IsInRoleAsync(user,currentRoleName )){
+            if (await _userManager.IsInRoleAsync(user, currentRoleName))
+            {
 
                 var x = await _userManager.RemoveFromRoleAsync(user, currentRoleName);
                 if (x.Succeeded)
@@ -193,9 +197,62 @@ namespace Trailer.API.Data
                         return true;
                     }
                 }
-             }
+            }
 
             return false;
+        }
+
+        public async Task<IEnumerable<Category>> GetCategories()
+        {
+            return await _db.Categories.ToListAsync();
+        }
+
+        public async Task<bool> DaleteAllCategory(List<string> ids)
+        {
+            if (ids.Count < 0) {return false;}
+
+            var i = 0;
+            foreach (string id in ids)
+            {
+                var Category = await _db.Categories.FirstOrDefaultAsync(x => x.Id.ToString() == id);
+                if (Category == null)
+                {
+                    return false;
+                }
+                _db.Categories.Remove(Category);
+                i++;               
+            }
+             if (i > 0){ await _db.SaveChangesAsync();}
+            return true;
+        }
+
+        public async Task<Category> AddCategory(AddCategoryDto model)
+        {
+            if(model==null)return null;
+            var Category=_mapper.Map<Category>(model);
+            var result=await _db.Categories.AddAsync(Category);
+            await _db.SaveChangesAsync();
+            return Category;
+        }
+
+        public async Task<Category> GetCategory(EditCategoryDto model)
+        {
+           // if(model.Id==null)return null;
+            var category=await _db.Categories.FirstOrDefaultAsync(x=>x.Id==model.Id);
+            if(category==null)return null;
+            return category;
+        }
+
+        public async Task<Category> GetCategory(int id)
+        {
+             var category = await _db.Categories.FirstOrDefaultAsync(x => x.Id == id); 
+            return category;
+
+        }
+    
+         public async Task<bool> SaveAll()
+        {
+            return await _db.SaveChangesAsync() > 0;
         }
     }
 

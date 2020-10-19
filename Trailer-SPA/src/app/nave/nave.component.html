@@ -90,8 +90,15 @@
 
 								</ul>
 							</li>
-							<li class="it-last"><a href="seriessingle.html">Series single</a></li>
-							<li><a>Movie single</a></li>
+							<li class="dropdown">
+								<a  class="dropdown-toggle" data-toggle="dropdown"> Category<i
+										class="ion-ios-arrow-forward"></i></a>
+								<ul class="dropdown-menu level2">
+									<li><a routerLink="categorylist">View All Categories</a></li>
+									<li><a  [routerLink]="['/addcategory']" >Add Category</a></li>
+
+								</ul>
+							</li>							<li><a>Movie single</a></li>
 							<li class="it-last"><a href="seriessingle.html">Series single</a></li>
 						</ul>
 					</li>

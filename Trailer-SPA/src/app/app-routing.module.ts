@@ -13,6 +13,10 @@ import { AccessDeniedComponent } from './Auth-Guard/access-denied/access-denied.
 import { NotFoundComponent } from './Auth-Guard/not-found/not-found.component';
 import { AuthGuardService } from './_guards/auth-guard.service';
 import { EditRolesComponent } from './Admin/edit-roles/edit-roles.component';
+import { CategoriesListComponent } from './Admin/Manage-Categories/categories-list/categories-list.component';
+import { Category } from './_models/CategoryModel';
+import { CategoriesAddComponent } from './Admin/Manage-Categories/categories-add/categories-add.component';
+import { CategoryEditComponent } from './Admin/Manage-Categories/category-edit/category-edit.component';
 
 const routes: Routes = [
   {path:'',component:HomeComponent},
@@ -29,6 +33,9 @@ const routes: Routes = [
   {path:'accessdenied',component:AccessDeniedComponent},
   {path:'notfound',component:NotFoundComponent},
   {path:'edituserrole/:id/:id1',component:EditRolesComponent},
+  {path:'categorylist',component:CategoriesListComponent},
+  {path:'addcategory',component:CategoriesAddComponent},
+  {path:'editcategory/:id',component:CategoryEditComponent},
 ];
 
 @NgModule({

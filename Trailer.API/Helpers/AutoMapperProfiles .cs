@@ -1,3 +1,4 @@
+using AngularToAPI.Models;
 using AngularToAPI.ModelViews.users;
 using AutoMapper;
 using Trailer.API.Dtos;
@@ -12,6 +13,12 @@ namespace Trailer.API.Helpers
             CreateMap<UserRegisterDto,User>();
             CreateMap<AddUserModel,User>();
             CreateMap<EditUserModel,User>();
+            // Category
+            CreateMap<AddCategoryDto,Category>();
+            CreateMap<EditCategoryDto,Category>();
+            CreateMap<Category,CategoryForDetailsDto>()
+            .ForMember(dest=>dest.CategoryName,opt=>{opt.MapFrom(src=>src.CategoryName);});
+
         }
     }
 }

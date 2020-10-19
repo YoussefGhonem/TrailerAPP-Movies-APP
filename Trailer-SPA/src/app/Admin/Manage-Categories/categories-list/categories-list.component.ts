@@ -1,26 +1,34 @@
 import { Component, OnInit } from '@angular/core';
-import { AdminService } from 'src/app/_services/admin.service';
-import { User } from 'src/app/_models/user';
-import { Users } from 'src/app/_models/users';
-import { Route } from '@angular/compiler/src/core';
 import { Router } from '@angular/router';
-import * as $ from 'jquery';
+import { Category } from 'src/app/_models/CategoryModel';
+import { AdminService } from 'src/app/_services/admin.service';
+import { AlertifyService } from 'src/app/_services/alertify.service';
+// import { threadId } from 'worker_threads';
 
 @Component({
-  selector: 'app-users',
-  templateUrl: './users.component.html',
-  styleUrls: ['./users.component.css']
+  selector: 'app-categories-list',
+  templateUrl: './categories-list.component.html',
+  styleUrls: ['./categories-list.component.css']
 })
-export class UsersComponent implements OnInit {
+export class CategoriesListComponent implements OnInit {
 
-  constructor(private service: AdminService, private router: Router) { }
-  users: Users[];
+  constructor(private service: AdminService, private route: Router,private alertifyService:AlertifyService) { }
+  categories: Category[];
   num: number;
+
   ngOnInit(): void {
-    this.users = null;
-    this.GetAllUsers();
+    this.categories = null;
+    this.GetAllCategories();
     this.ModaleDessgin();
     this.SelectAll();
+  }
+  GetAllCategories() {
+    this.service.GetAllCategories().subscribe((s) => {
+      this.categories = s;
+    }, e => console.log(e));
+  }
+  EditCategoryURL(id: number) {
+    this.route.navigate(['editcategory/', id])
   }
   ModaleDessgin() {
     $("#btn").click(function() {
@@ -35,16 +43,8 @@ export class UsersComponent implements OnInit {
       $("#btn").css("display", "flex");
     });
   }
-  GetAllUsers() {
-    this.service.GetAllUsers().subscribe((list) => {
-      this.users = list;
-    }, er => { console.log(er) })
-  }
-  EditUserURL(id: string) {
-    this.router.navigate(['edituser/', id])
-  }
-  // Delete Check Box
-  SelectAll() {
+   // Delete Check Box
+   SelectAll() {
     var tbl = $('#tbl');
     var $header = tbl.find('thead .ckheader');
     var item = tbl.find('tbody .ckitem');
@@ -59,8 +59,8 @@ export class UsersComponent implements OnInit {
         }
       });
       $header.change(function () {
-        // var c = this.checked;
-        // item.prop("checked", c);
+        var c = this.checked;
+        item.prop("checked", c);
         item.trigger('check');
         if ($(this).is(':checked')) {
           $(item).closest('tr').addClass('NewRowColor');
@@ -100,9 +100,8 @@ export class UsersComponent implements OnInit {
           ids.push(id);
         }
       }
-
-      this.service.DeleteAll(ids).subscribe(s => {
-        this.GetAllUsers();
+      this.service.DeleteAllCategory(ids).subscribe(s => {
+        this.GetAllCategories();
         $("#btnClose").trigger("click");
       }, ex => console.log(ex));
     }

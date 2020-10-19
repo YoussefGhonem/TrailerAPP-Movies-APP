@@ -22,6 +22,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.WebUtilities;
 using AngularToAPI.ModelViews.users;
+using AngularToAPI.Models;
 
 namespace Trailer.API.Controllers
 {
@@ -44,6 +45,7 @@ namespace Trailer.API.Controllers
             if (users == null) return null;
             return users;
         }
+
 
         [HttpPost("AddUser")]
         public async Task<IActionResult> AddUser(AddUserModel model)
@@ -85,6 +87,8 @@ namespace Trailer.API.Controllers
             }
             return BadRequest();
         }
+        
+        
         [HttpPost("DeleteUsers")]
         public async Task<ActionResult<User>> DeleteUsers(List<string> ids)
         {

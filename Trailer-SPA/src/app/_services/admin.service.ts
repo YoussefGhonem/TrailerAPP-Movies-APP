@@ -9,11 +9,15 @@ import { EditUserModel } from '../_models/EditUserModel';
 import { UserRoleModel } from '../_models/UserRoleModel';
 import { RoleModel } from '../_models/RoleModel';
 import { EditUserRoleModel } from '../_models/EditUserRoleModel';
+import { Category } from '../_models/CategoryModel';
+import { CategoryAdd } from '../_models/CategoryAddModel';
+import { EditCategory } from '../_models/EditCategory';
 @Injectable({
   providedIn: 'root'
 })
 export class AdminService {
   baseURL = environment.apiUrl + 'admin/';
+  baseURLCategory = environment.apiUrl + 'Category/';
   constructor(private http: HttpClient) { }
   headers = {
     headers: new HttpHeaders({
@@ -47,4 +51,22 @@ export class AdminService {
   EditUserRole(model: EditUserRoleModel): Observable<EditUserRoleModel> {
     return this.http.put<EditUserRoleModel>(this.baseURL + 'EditUserRole', model, this.headers).pipe();
   }
+  // CATEGORY
+  GetAllCategories(): Observable<Category[]> {
+    return this.http.get<Category[]>(this.baseURLCategory + 'GetCategories', this.headers).pipe();
+  }
+
+  DeleteAllCategory(ids: string[]) {
+    return this.http.post(this.baseURLCategory + 'DaleteAllCategory', ids, this.headers).pipe();
+  }
+  AddCategory(model: CategoryAdd) {
+    return this.http.post<CategoryAdd>(this.baseURLCategory + 'AddCategory', model, this.headers);
+  }
+  GetCategory(id: string): Observable<EditCategory> {
+    return this.http.get<EditCategory>(this.baseURLCategory + id, this.headers).pipe();
+  }
+  EditCategory(model: EditCategory, id: number) {
+    return this.http.put(this.baseURLCategory + 'EditCategory/' + id,model);
+  }
+
 }

@@ -23,6 +23,9 @@ import { AuthGuardService } from './_guards/auth-guard.service';
 import { AccessDeniedComponent } from './Auth-Guard/access-denied/access-denied.component';
 import { NotFoundComponent } from './Auth-Guard/not-found/not-found.component';
 import { EditRolesComponent } from './Admin/edit-roles/edit-roles.component';
+import { CategoriesListComponent } from './Admin/Manage-Categories/categories-list/categories-list.component';
+import { CategoriesAddComponent } from './Admin/Manage-Categories/categories-add/categories-add.component';
+import { CategoryEditComponent } from './Admin/Manage-Categories/category-edit/category-edit.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -41,7 +44,10 @@ import { EditRolesComponent } from './Admin/edit-roles/edit-roles.component';
     UserRolesComponent,
     AccessDeniedComponent,
     NotFoundComponent,
-    EditRolesComponent
+    EditRolesComponent,
+    CategoriesListComponent,
+    CategoriesAddComponent,
+    CategoryEditComponent
   ],
   imports: [
     BrowserModule,

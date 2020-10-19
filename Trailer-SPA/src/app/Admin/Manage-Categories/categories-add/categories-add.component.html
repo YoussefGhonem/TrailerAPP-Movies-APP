@@ -1,0 +1,31 @@
+
+<div class="form_wrapper">
+    <div class="form_container">
+      <div class="title_container">
+        <h2>Add A New Category</h2>
+      </div>
+      <div class="row clearfix">
+        <div class="">
+          <form [formGroup]="categoryForm" (ngSubmit)="createCategory()">
+  
+            <div class="row clearfix">
+              <div class="col_half">
+                <div class="input_field"> <span><i aria-hidden="true" class="fa fa-user"></i></span>
+                  <input type="text" name="categoryName" placeholder="Category Name" formControlName="categoryName" (blur)="isUserNameExist()"/>
+                  <div style="color: crimson;"
+                  *ngIf="this.userForm.get('categoryName').touched  && this.userForm.get('categoryName').hasError('required')">
+                  required</div>
+
+                </div>
+              </div>
+            </div>
+
+
+  
+            <button type="submit" class="button" [disabled]="categoryForm.invalid ">Submit</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  
